@@ -1,0 +1,71 @@
+@use "bootstrap/scss/functions" as *;
+@use "bootstrap/scss/mixins" as *;
+
+$body-color: #141214;
+$body-secondary-color: #1f0029;
+$body-tertiary-color: #fbf5fe;
+
+$body-primary-bg: #fbf5fe;
+$body-tertiary-bg: #512e73;
+$font-family-base: "National Park";
+
+@use "bootstrap/scss/bootstrap";
+
+body {
+  background-color: $body-primary-bg !important;
+  font-family: "National Park", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $body-secondary-color !important;
+  font-family: "Lilita One", sans-serif;
+}
+
+.nav-link {
+  font-family: "Lilita One", sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+
+.nav {
+  .nav-link {
+    font-weight: bold !important;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+}
+
+a {
+  color: $body-color !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+.colored-bg {
+  color: $body-tertiary-color;
+  background-color: $body-tertiary-bg;
+
+  a {
+    color: $body-tertiary-color !important;
+  }
+}
+
+.footer {
+  margin-top: auto;
+}
+
+hr.hr {
+  border-color: $body-tertiary-bg !important;
+  opacity: 0.6 !important;
+}
+
+
