@@ -1,0 +1,10 @@
+{
+  "hello": "Bonjour",
+  "nav": {
+    "home": "Accueil",
+    "team": "L'Équipe",
+    "participation": "Nos Participations",
+    "newsletters": "La Newsletter",
+    "contact": "Contact"
+  }
+}

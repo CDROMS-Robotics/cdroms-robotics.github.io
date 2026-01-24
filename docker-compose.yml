@@ -1,0 +1,13 @@
+services:
+  cdroms:
+    image: node:24
+    working_dir: /opt/project
+    volumes:
+      - PATH_TO_REPO:/opt/project
+    ports:
+      - "8080"
+    entrypoint: [""]
+    command: npm run dev
+    stdin_open: true
+    tty: true
+    restart: "no"
