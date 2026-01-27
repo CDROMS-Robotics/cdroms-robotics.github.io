@@ -10,7 +10,7 @@ const LegalNotice = () => {
             </p>
             <h4>Hébergement</h4>
             <p>
-                Le site est hébergé par <a href="pages.github.com">GitHub Pages</a>, service de <a href="github.com">GitHub,
+                Le site est hébergé par <a href="https://pages.github.com">GitHub Pages</a>, service de <a href="https://github.com">GitHub,
                 Inc</a>.<br/>
                 Adresse : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA<br/>
             </p>
@@ -18,8 +18,8 @@ const LegalNotice = () => {
             <p>
                 Tout le contenu (textes, images, logos, codes) est la propriété de l’association ou de ses auteurs et
                 reste protégé par la législation française et internationale.<br/><br/>
-                Le code source du projet est distribué sous licence <a href="TODO">GPL</a>.<br/>
-                Les newsletters et autres contenus textuels sont sous licence <a href="TODO">CC BY-NC-SA</a>.
+                Le code source du projet est distribué sous licence <a href="https://github.com/CDROMS-Robotics/cdroms-robotics.github.io/blob/master/LICENSE">GPL</a>.<br/>
+                Les newsletters et autres contenus textuels sont sous licence <a href="https://github.com/CDROMS-Robotics/cdroms-robotics.github.io/blob/master/LICENSE-CC">CC BY-NC-SA</a>.
             </p>
             <h4>Responsabilité</h4>
             <p>
