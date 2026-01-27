@@ -53,7 +53,7 @@ const Newsletters: React.FC = () => {
         } else {
             return (<div className="container col-12 col-md-6">
                     <div className="d-flex justify-content-end">
-                        <a href="/newsletters/">Retour à la liste</a>
+                        <a href="/#/newsletters/">Retour à la liste</a>
                     </div>
                     <div style={{textAlign: "justify"}}>
                         <ReactMarkdown

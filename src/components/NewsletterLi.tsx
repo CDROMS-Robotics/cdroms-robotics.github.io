@@ -13,7 +13,7 @@ const NewsletterLi: React.FC<NewsletterLiProps> = ({
                                 }: NewsletterLiProps) => {
     return <>
         <li>
-            <a className="d-flex gap-3" href={`newsletters/${folder}`}>
+            <a className="d-flex gap-3" href={`/#/newsletters/${folder}`}>
                 <strong className="">{title}</strong>
                 <p className="m-0">({date})</p>
             </a>

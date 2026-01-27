@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
                     Code source
                 </a>
                 •
-                <a href="/legal-notice">Mentions Légales</a>
+                <a href="/#/legal-notice">Mentions Légales</a>
             </div>
         </footer>
     )
