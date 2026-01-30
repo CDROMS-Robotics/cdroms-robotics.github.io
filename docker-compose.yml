@@ -3,8 +3,7 @@ services:
     image: node:24
     working_dir: /opt/project
     volumes:
-      # - PATH_TO_REPO:/opt/project
-      - /home/mowibox/Documents/WorkspaceU/cdroms/cdroms-robotics.github.io:/opt/project
+      - PATH_TO_REPO:/opt/project
     ports:
       - "8080"
     entrypoint: [""]
