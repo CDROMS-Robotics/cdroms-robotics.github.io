@@ -6,8 +6,10 @@ $body-secondary-color: #1f0029;
 $body-tertiary-color: #fbf5fe;
 
 $body-primary-bg: #fbf5fe;
-$body-tertiary-bg: #512e73;
+$body-tertiary-bg: #52277c;
 $font-family-base: "National Park";
+
+$nav-link-underline-color: #df45ff;
 
 @use "bootstrap/scss/bootstrap";
 
@@ -18,11 +20,13 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: $body-secondary-color !important;
-  font-family: "Lilita One", sans-serif;
+  font-family: "Varela Round", sans-serif;
+  font-weight: bolder;
 }
 
 .nav-link {
-  font-family: "Lilita One", sans-serif;
+  font-family: "Varela Round", sans-serif;
+  font-weight: bolder;
 }
 
 #root {
@@ -36,10 +40,19 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold !important;
   }
 
+  .nav-link.active {
+    border-bottom-color: $nav-link-underline-color !important;
+  }
+
+  .nav-link:hover {
+    border-bottom-color: $nav-link-underline-color !important;
+  }
+  
   a:hover {
     text-decoration: none !important;
   }
 }
+
 
 a {
   color: $body-color !important;
@@ -64,7 +77,7 @@ a:hover {
 }
 
 hr.hr {
-  border-color: $body-tertiary-bg !important;
+  border-color: $nav-link-underline-color !important;
   opacity: 0.6 !important;
 }
 
