@@ -37,19 +37,19 @@ const Eurobot: React.FC<EurobotProps> = ({
                             return (
                                 <div className="d-flex align-items-center gap-2">
                                     <MdOutlineLeaderboard size={24}/>
-                                    <p className="m-0">Série {idx + 1}: {p} pts</p>
+                                    <p className="m-0">Série {idx + 1} : {p} pts</p>
                                 </div>)
                         } else if (p === null) {
                             return (
                                 <div className="d-flex align-items-center gap-2">
                                     <MdOutlineLeaderboard size={24}/>
-                                    <p className="m-0">Série {idx + 1}: X pts</p>
+                                    <p className="m-0">Série {idx + 1} : X pts</p>
                                 </div>)
                         } else if (p === undefined) {
                             return (
                                 <div className="d-flex align-items-center gap-2">
                                     <MdOutlineLeaderboard size={24}/>
-                                    <p className="m-0 d-flex align-items-center">Série {idx + 1}: <CiSquareQuestion
+                                    <p className="m-0 d-flex align-items-center">Série {idx + 1} : <CiSquareQuestion
                                         size={24}/> pts</p>
                                 </div>)
                         }

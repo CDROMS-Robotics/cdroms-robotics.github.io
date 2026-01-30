@@ -1,15 +1,15 @@
 @use "bootstrap/scss/functions" as *;
 @use "bootstrap/scss/mixins" as *;
 
-$body-color: #141214;
-$body-secondary-color: #1f0029;
+$body-color: #131214;
+$body-secondary-color: #580078;
 $body-tertiary-color: #fbf5fe;
 
 $body-primary-bg: #fbf5fe;
 $body-tertiary-bg: #52277c;
 $font-family-base: "National Park";
 
-$nav-link-underline-color: #df45ff;
+$nav-link-underline-color: #cf45ff;
 
 @use "bootstrap/scss/bootstrap";
 
@@ -42,10 +42,15 @@ h1, h2, h3, h4, h5, h6 {
 
   .nav-link.active {
     border-bottom-color: $nav-link-underline-color !important;
+    border-bottom-width: 3px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
   }
 
   .nav-link:hover {
     border-bottom-color: $nav-link-underline-color !important;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
   }
   
   a:hover {
@@ -78,7 +83,7 @@ a:hover {
 
 hr.hr {
   border-color: $nav-link-underline-color !important;
-  opacity: 0.6 !important;
+  opacity: 0.5 !important;
 }
 
 
