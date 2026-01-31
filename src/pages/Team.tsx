@@ -99,7 +99,8 @@ const Team: React.FC = () => {
                                     description={p.description}
                                     participation={p.participation}
                                     inverted={idx % 2 == 1}/>
-                            {idx < members.length - 1 && <hr className="border border-2 w-25 m-auto hr"/>}
+                                    <br/>
+                            {idx < members.length - 1 && <hr className="border border-1 w-75 m-auto hr"/>}
                         </div>
                     )
                 })
