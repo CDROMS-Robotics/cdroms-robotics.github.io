@@ -29,7 +29,7 @@ const Eurobot: React.FC<EurobotProps> = ({
         <div className="d-flex align-items-center">
             <img src={logo} height={250}/>
             <div className="d-flex flex-column gap-2 w-75" style={{marginLeft: "auto"}}>
-                <h4>Coupe de France de robotique {year}</h4>
+                <h4>Coupe de France de Robotique {year}</h4>
                 <p className="m-0">{description}</p>
                 <div className="d-flex flex-row gap-3">
                     {points.map((p, idx) => {
@@ -37,20 +37,20 @@ const Eurobot: React.FC<EurobotProps> = ({
                             return (
                                 <div className="d-flex align-items-center gap-2">
                                     <MdOutlineLeaderboard size={24}/>
-                                    <p className="m-0">Serie {idx + 1}: {p}</p>
+                                    <p className="m-0">Série {idx + 1} : {p} pts</p>
                                 </div>)
                         } else if (p === null) {
                             return (
                                 <div className="d-flex align-items-center gap-2">
                                     <MdOutlineLeaderboard size={24}/>
-                                    <p className="m-0">Serie {idx + 1}: X</p>
+                                    <p className="m-0">Série {idx + 1} : X pts</p>
                                 </div>)
                         } else if (p === undefined) {
                             return (
                                 <div className="d-flex align-items-center gap-2">
                                     <MdOutlineLeaderboard size={24}/>
-                                    <p className="m-0 d-flex align-items-center">Serie {idx + 1}: <CiSquareQuestion
-                                        size={24}/></p>
+                                    <p className="m-0 d-flex align-items-center">Série {idx + 1} : <CiSquareQuestion
+                                        size={24}/> pts</p>
                                 </div>)
                         }
                     })}
@@ -73,7 +73,7 @@ const Eurobot: React.FC<EurobotProps> = ({
                                         <div className="d-flex flex-column align-items-center gap-2">
                                             <img height={75} src={partner.logo}/>
                                             <p className="m-0"
-                                               style={{color: "#4e4852", fontSize: "12px"}}>{partner.name}</p>
+                                               style={{color: "#4e4852", fontSize: "13px"}}>{partner.name}</p>
                                         </div>
                                     </a>
                                 ))

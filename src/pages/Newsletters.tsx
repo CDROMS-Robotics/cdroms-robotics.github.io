@@ -40,9 +40,9 @@ const Newsletters: React.FC = () => {
                     <LoremIpsum/>
                 </div>
                 <div className="container col-12 col-md-3 mt-3 mb-5">
-                    <p className="m-0 mb-3">
+                    <h3 className="m-0 mb-3">
                         Les newsletters de cette année :
-                    </p>
+                    </h3>
                     <ul className="m-0 d-flex flex-column gap-1">
                         {Object.entries(data).map(([folder, data]) => (
                             <NewsletterLi key={folder} folder={folder} title={data.title} date={data.date}/>
