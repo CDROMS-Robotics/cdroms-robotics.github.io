@@ -37,7 +37,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav {
   .nav-link {
-    font-weight: bold !important;
+    font-weight: 500 !important;
+  }
+  @-moz-document url-prefix() {
+    .nav-link {
+      font-weight: 600 !important;
+    }
   }
 
   .nav-link.active {
