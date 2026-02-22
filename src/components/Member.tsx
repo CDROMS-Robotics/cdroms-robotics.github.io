@@ -21,16 +21,17 @@ const Member: React.FC<MemberProps> = ({
     return (
         <div className={`d-flex gap-3 ${inverted ? "flex-row-reverse" : ""}`}>
             <img height="250px" src={image} alt={`${firstname} ${lastname}`}/>
-            <div className="d-flex flex-column w-100" style={{height: '250px'}}>
-                <div className={`d-flex gap-3 h-50 ${inverted ? "flex-row-reverse" : ""}`}>
-                    <div className={`w-25 ${inverted ? "text-end" : ""}`}>
-                        <h3 className="fs-1 mb-0">{firstname}</h3>
-                        <h3 className="fs-1 mb-0">{lastname}</h3>
+            <div className="d-flex flex-column w-100 gap-1">
+                <div className={`d-flex gap-3 ${inverted ? "flex-row-reverse" : ""}`}>
+                    <div className={`${inverted ? "text-end" : ""}`}>
+                        <h3 className="fs-1 mb-0">{firstname}<br/>{lastname}</h3>
                     </div>
                     <p className="m-0 w-75 fs-5" style={{textAlign: "justify"}}>{description}</p>
                 </div>
-                <div className="d-flex gap-3 h-50">
-                    {!inverted && <img src="/assets/cd.png" alt="CD"/>}
+                <div className="d-flex gap-3" style={{minHeight: '150px', maxHeight: '175px'}}>
+                    {!inverted &&
+                        <div className="d-flex align-items-center"><img src="/assets/cd.png" height={125} alt="CD"/>
+                        </div>}
                     <div className="d-flex column-gap-2 row-gap-1 flex-wrap flex-column w-100">
                         {
                             participation.map((type, index) => {
@@ -55,7 +56,9 @@ const Member: React.FC<MemberProps> = ({
                             )
                         }
                     </div>
-                    {inverted && <img src="/assets/cd.png" alt="CD"/>}
+                    {inverted &&
+                        <div className="d-flex align-items-center"><img src="/assets/cd.png" height={125} alt="CD"/>
+                        </div>}
                 </div>
             </div>
         </div>
