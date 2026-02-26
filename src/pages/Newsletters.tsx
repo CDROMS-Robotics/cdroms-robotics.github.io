@@ -5,7 +5,6 @@ import "./Newsletters.scss"
 import {remarkHighlight} from "../md-flavor.ts"
 import {useParams} from "react-router-dom";
 import NewsletterLi from "../components/NewsletterLi.tsx";
-import LoremIpsum from "../components/LoremIpsum.tsx";
 
 interface NewsletterData {
     date: string;
@@ -36,10 +35,13 @@ const Newsletters: React.FC = () => {
         if (!id) {
             return <>
                 <div className="container col-12 col-md-6 mt-5" style={{textAlign: "justify"}}>
-                    {/* TODO Make intro */}
-                    <LoremIpsum/>
+                    Pour vivre cette aventure avec nos proches, nous avons, l’an passé, partagé l’avancement du projet à
+                    travers des newsletters. Depuis 2026, nous avons décidé de les rendre publiques. Les newsletters
+                    vulgarisent les différentes étapes de construction des robots : qu’il s’agisse d’un choix d’actions
+                    à réaliser durant la Coupe, la conception de pièces mécaniques ou encore les tests de code des
+                    robots, une de nos newsletters abordera (probablement) le sujet !
                 </div>
-                <div className="container col-12 col-md-3 mt-3 mb-5">
+                <div className="container col-12 col-md-3 mt-3 mb-5" style={{width: "30%"}}>
                     <h3 className="m-0 mb-3">
                         Les newsletters de cette année :
                     </h3>
