@@ -4,7 +4,7 @@ const LegalNotice = () => {
             <h2>Mentions légales</h2>
             <h4>Éditeur du site</h4>
             <p>
-                Le site est édité par la SC Association, association loi 1901 déclarée sous le numéro RNA W923010069.Il
+                Le site est édité par SC Association, association loi 1901 déclarée sous le numéro RNA W923010069. Il
                 partage du contenu lié à l’équipe CDROMS, qui participe à la Coupe de France de Robotique de Planète
                 Sciences.
             </p>
@@ -16,8 +16,8 @@ const LegalNotice = () => {
             </p>
             <h4>Propriété intellectuelle</h4>
             <p>
-                Tout le contenu (textes, images, logos, codes) est la propriété de l’association ou de ses auteurs et
-                reste protégé par la législation française et internationale.<br/><br/>
+                Tout le contenu (textes, images, logos, codes) est la propriété de l’association et de ses auteurs et
+                reste protégé par la législation française.<br/><br/>
                 Le code source du projet est distribué sous licence <a href="https://github.com/CDROMS-Robotics/cdroms-robotics.github.io/blob/master/LICENSE">GPL</a>.<br/>
                 Les newsletters et autres contenus textuels sont sous licence <a href="https://github.com/CDROMS-Robotics/cdroms-robotics.github.io/blob/master/LICENSE-CC">CC BY-NC-SA</a>.
             </p>
@@ -28,7 +28,7 @@ const LegalNotice = () => {
             </p>
             <br/>
             <p className="fst-italic">
-                Dernière mise à jour : 24/01/2025
+                Dernière mise à jour : 26/02/2025
             </p>
         </div>
     );

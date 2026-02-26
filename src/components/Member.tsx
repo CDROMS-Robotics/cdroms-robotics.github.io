@@ -23,7 +23,7 @@ const Member: React.FC<MemberProps> = ({
             <img height="250px" src={image} alt={`${firstname} ${lastname}`}/>
             <div className="d-flex flex-column w-100 gap-1">
                 <div className={`d-flex gap-3 ${inverted ? "flex-row-reverse" : ""}`}>
-                    <div className={`${inverted ? "text-end" : ""}`}>
+                    <div className={`${inverted ? "text-end" : ""}`} style={{marginLeft: "auto"}}>
                         <h3 className="fs-1 mb-0">{firstname}<br/>{lastname}</h3>
                     </div>
                     <p className="m-0 w-75 fs-5" style={{textAlign: "justify"}}>{description}</p>
