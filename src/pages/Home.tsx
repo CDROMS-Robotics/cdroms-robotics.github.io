@@ -1,16 +1,60 @@
 import * as React from "react";
-
+import {useMemo, useState} from "react";
+import "./Home.scss";
 
 const Home: React.FC = () => {
+    const [_, setDisappearsTrigger] = useState<number | null>(null);
+
+    const hideLogo = useMemo(() => {
+        return (logo: HTMLElement) => {
+            logo.style.display = "none";
+        }
+    }, []);
+    const enterLogo = useMemo(() => {
+        return (event: React.MouseEvent<HTMLDivElement>) => {
+            // Prevent creating trigger while the logo appears
+            const logo = event.target as HTMLElement;
+            for (const animation of logo.getAnimations()) {
+                if (animation.playState != "finished")
+                    return;
+            }
+            // Create a timeout to trigger the animation of disappearance
+            console.log("Trigger created")
+            const timeout = setTimeout(() => {
+                setDisappearsTrigger((trigger) => {
+                    if (trigger != null)
+                        clearTimeout(trigger);
+                    return null
+                });
+                const logo = event.target as HTMLElement;
+                console.log("Trigger triggered")
+                console.log(logo)
+                logo.classList.add("logo-leaves");
+                logo.onanimationend = () => hideLogo(logo);
+            }, 5000);
+            setDisappearsTrigger(timeout);
+        }
+    }, [hideLogo, setDisappearsTrigger]);
+    const leaveLogo = useMemo(() => {
+        return () => {
+            setDisappearsTrigger((trigger) => {
+                if (trigger != null) {
+                    console.log("Trigger removed")
+                    clearTimeout(trigger);
+                }
+                return null
+            });
+        }
+    }, [setDisappearsTrigger]);
+
     return (
         <>
-            <img style={{
-                height: "calc(100vh - 42px)",
-                minWidth: "100vw",
-                width: "auto",
-                objectFit: "cover",
-                objectPosition: "30% 40%",
-            }} src="/assets/home.jpg" alt="image"/>
+            <div className="parallax">
+                <div className="parallax-layer background"/>
+                <div className="parallax-layer logo-container">
+                    <div className="logo" onMouseEnter={enterLogo} onMouseLeave={leaveLogo}></div>
+                </div>
+            </div>
             <div className="container mb-5">
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-8">
@@ -68,7 +112,6 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </div>
-
         </>
     )
 };

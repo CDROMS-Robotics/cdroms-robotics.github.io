@@ -1,0 +1,66 @@
+
+.parallax {
+  height: calc(100vh - 42px);
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  height: calc(100vh - 42px);
+  width: 100vw;
+}
+
+.background {
+  background: url('../../public/assets/home.jpg') no-repeat fixed center;
+  z-index: 0;
+}
+
+.logo-container {
+  display: flex;
+}
+
+.logo {
+  margin: auto;
+  background: url('../../public/restricted-assets/cdroms/logos/cdroms-500x500.png') no-repeat center;
+  background-size: max(20vw, 20vh, 250px);
+  width: max(20vw, 20vh, 250px);
+  height: max(20vw, 20vh, 250px);
+  z-index: 1;
+  animation: 3s cubic-bezier(.22, .61, .36, 1) 0s normal forwards 1 appears;
+}
+
+.logo-leaves {
+  animation: 3s cubic-bezier(.22, .61, .36, 1) 0s normal forwards 1 disappears;
+}
+
+@keyframes appears {
+  0% {
+    opacity: 0;
+    transform: translateX(-400px) rotate(-180deg);
+  }
+  33% {
+    opacity: 0;
+    transform: translateX(-400px) rotate(-180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes disappears {
+  0% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+  33% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(400px) rotate(180deg);
+  }
+}
