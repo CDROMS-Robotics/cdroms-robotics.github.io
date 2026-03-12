@@ -73,17 +73,17 @@ const Team: React.FC = () => {
                     ParticipationType.NONE, ParticipationType.SENIOR, ParticipationType.NONE,
                     ParticipationType.NONE, ParticipationType.SENIOR, ParticipationType.SENIOR]
             },
-            {
-                firstname: "Jan", lastname: "Kozakiewicz",
-                image: "/restricted-assets/cdroms/members/jk.png",
-                description: "Calme mais efficace, il contribue à la conception mécanique des robots depuis les " +
-                    "Pays-Bas. Comme quoi, la distance n'est pas un défi pour imaginer des pièces en tout genre.",
-                participation: [ParticipationType.NONE, ParticipationType.NONE, ParticipationType.NONE,
-                    ParticipationType.NONE, ParticipationType.NONE, ParticipationType.NONE,
-                    ParticipationType.NONE, ParticipationType.NONE, ParticipationType.NONE,
-                    ParticipationType.NONE, ParticipationType.NONE, ParticipationType.NONE,
-                    ParticipationType.NONE, ParticipationType.NONE, ParticipationType.SENIOR]
-            }
+            // {
+            //     firstname: "Jan", lastname: "Kozakiewicz",
+            //     image: "/restricted-assets/cdroms/members/jk.png",
+            //     description: "Calme mais efficace, il contribue à la conception mécanique des robots depuis les " +
+            //         "Pays-Bas. Comme quoi, la distance n'est pas un défi pour imaginer des pièces en tout genre.",
+            //     participation: [ParticipationType.NONE, ParticipationType.NONE, ParticipationType.NONE,
+            //         ParticipationType.NONE, ParticipationType.NONE, ParticipationType.NONE,
+            //         ParticipationType.NONE, ParticipationType.NONE, ParticipationType.NONE,
+            //         ParticipationType.NONE, ParticipationType.NONE, ParticipationType.NONE,
+            //         ParticipationType.NONE, ParticipationType.NONE, ParticipationType.SENIOR]
+            // }
         ]
     }, [])
     return (
