@@ -7,7 +7,7 @@ This is the website of the CDROMS robotics team.
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-e557f9.svg)](LICENSE-CC)
 ![Stars](https://img.shields.io/github/stars/CDROMS-Robotics/cdroms-robotics.github.io?style=social)
 
-![cdroms](https://github.com/user-attachments/assets/efd5609f-3e75-4364-b509-2203a587a18e)
+![cdroms](/public/restricted-assets/cdroms/logos/cdroms-readme.jpg)
 
 ## Development setup
 
