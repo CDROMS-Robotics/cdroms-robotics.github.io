@@ -3,7 +3,7 @@ import Eurobot from "../components/Eurobot.tsx";
 
 const Participations: React.FC = () => {
     return (
-        <div className="container d-flex flex-column gap-5 mt-auto mb-auto">
+        <div className="container d-flex flex-column gap-5 py-5">
             <Eurobot
                 year={2026}
                 description="Pour notre seconde année, l’objectif est d’apporter quelques améliorations au robot
@@ -44,6 +44,7 @@ const Participations: React.FC = () => {
                         url: "https://www.vanves.fr/"
                     }
                 ]}
+                poster="/restricted-assets/cdroms/posters/poster-2025.jpg"
             />
         </div>
     )
