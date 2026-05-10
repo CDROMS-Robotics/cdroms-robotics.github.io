@@ -57,7 +57,7 @@ const Eurobot: React.FC<EurobotProps> = ({
                     <div className="d-flex align-items-center gap-2">
                         <GoTrophy size={24} color="#e0a933"/>
                         <p className="m-0 d-flex align-items-center">
-                            <strong className="d-flex align-items-center">{result ? result :
+                            <strong className="d-flex align-items-center">{result ? <>{result}<sup>ème</sup></> :
                                 <CiSquareQuestion size={24}/>}</strong>/{leaderboard ? leaderboard :
                             <CiSquareQuestion size={24}/>}
                         </p>
