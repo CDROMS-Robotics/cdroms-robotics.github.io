@@ -12,7 +12,7 @@ const Participations: React.FC = () => {
                 logo="/restricted-assets/cdfr/2026.png"
                 points={[undefined, undefined, undefined, undefined, undefined]}
                 result={0}
-                leaderboard={0}
+                leaderboard={103}
                 partners={[
                     {
                         logo: "/restricted-assets/partners/savants_fous.png",
