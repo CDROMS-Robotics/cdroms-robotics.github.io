@@ -84,6 +84,30 @@ const Newsletters: React.FC = () => {
                                         </>
                                     );
                                 },
+                                a({href, children}) {
+                                    const newSrc = href?.startsWith('http') ? href : `/newsletters/${id}/${href}`;
+                                    if (newSrc.endsWith('mp4') && children) {
+                                        const words = children.toString().split(" ");
+                                        const size = words[words.length - 1];
+                                        const alt = children.toString().replace(` ${size}`, '');
+                                        const w = size?.split('x')[0];
+                                        const h = size?.split('x')[1];
+                                        return (
+                                            <>
+                                                <div className="d-flex flex-column align-items-center">
+                                                    <video controls src={newSrc}
+                                                           style={{maxWidth: `${w}px`, maxHeight: `${h}px`}}/>
+                                                    <br/>
+                                                    <span className="m-0 fst-italic">{alt}</span>
+                                                </div>
+                                            </>
+                                        );
+                                    } else {
+                                        return (
+                                            <a href={href}>{children}</a>
+                                        )
+                                    }
+                                },
                             }}>
                             {md}
                         </ReactMarkdown>
