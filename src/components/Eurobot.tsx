@@ -9,7 +9,8 @@ interface EurobotProps {
         logo: string,
         name: string,
         url: string,
-    }[]
+    }[],
+    poster?: string,
 }
 
 import {MdOutlineLeaderboard} from "react-icons/md";
@@ -23,10 +24,11 @@ const Eurobot: React.FC<EurobotProps> = ({
                                              points,
                                              result,
                                              leaderboard,
-                                             partners
+                                             partners,
+                                             poster,
                                          }: EurobotProps) => {
     return (
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-start">
             <img src={logo} height={250}/>
             <div className="d-flex flex-column gap-2 w-75" style={{marginLeft: "auto"}}>
                 <h4>Coupe de France de Robotique {year}</h4>
@@ -81,6 +83,26 @@ const Eurobot: React.FC<EurobotProps> = ({
                         </div>
                     </div>
                 }
+
+                {poster && (
+                    <div>
+                        <h5 className="mb-2 mt-2">Notre poster</h5>
+                        <a href={poster} target="_blank" rel="noopener noreferrer">
+                            <img
+                                src={poster}
+                                alt={`Poster ${year}`}
+                                height={250}
+                                style={{
+                                    cursor: "pointer",
+                                    transition: "transform 0.2s ease",
+                                    borderRadius: "4px",
+                                }}
+                                onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
+                                onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+                            />
+                        </a>
+                    </div>
+                )}
             </div>
         </div>
     )
