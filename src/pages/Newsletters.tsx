@@ -5,6 +5,7 @@ import "./Newsletters.scss"
 import {remarkHighlight} from "../md-flavor.ts"
 import {useParams} from "react-router-dom";
 import NewsletterLi from "../components/NewsletterLi.tsx";
+import remarkGfm from "remark-gfm";
 
 interface NewsletterData {
     date: string;
@@ -27,6 +28,7 @@ const Newsletters: React.FC = () => {
         if (id && data[id]) {
             fetch(`/newsletters/${id}/${data[id].markdown}`)
                 .then(res => res.text())
+                .then(text => text.replace(/\\n/g, "\n"))
                 .then(setMd);
         }
     }, [id, data]);
@@ -46,9 +48,16 @@ const Newsletters: React.FC = () => {
                         Les newsletters de cette année :
                     </h3>
                     <ul className="m-0 d-flex flex-column gap-1">
-                        {Object.entries(data).map(([folder, data]) => (
-                            <NewsletterLi key={folder} folder={folder} title={data.title} date={data.date}/>
-                        ))}
+                        {Object.entries(data)
+                            .filter(([_, d]) => new Date(d.date) <= new Date())
+                            .map(([folder, data]) => (
+                                <NewsletterLi
+                                    key={folder}
+                                    folder={folder}
+                                    title={data.title}
+                                    date={data.date}
+                                />
+                            ))}
                     </ul>
                 </div>
             </>;
@@ -59,7 +68,7 @@ const Newsletters: React.FC = () => {
                     </div>
                     <div style={{textAlign: "justify"}}>
                         <ReactMarkdown
-                            remarkPlugins={[remarkHighlight]}
+                            remarkPlugins={[remarkHighlight, remarkGfm]}
                             components={{
                                 p({node, children, ...props}) {
                                     const hasImg = node?.children?.some(
@@ -85,8 +94,8 @@ const Newsletters: React.FC = () => {
                                     );
                                 },
                                 a({href, children}) {
-                                    const newSrc = href?.startsWith('http') ? href : `/newsletters/${id}/${href}`;
-                                    if (newSrc.endsWith('mp4') && children) {
+                                    const newSrc = href?.startsWith('http') || href?.startsWith('/newsletters') ? href : `/newsletters/${id}/${href}`;
+                                    if (newSrc.endsWith('mp4') && !href?.startsWith("/newsletters") && children) {
                                         const words = children.toString().split(" ");
                                         const size = words[words.length - 1];
                                         const alt = children.toString().replace(` ${size}`, '');
@@ -94,12 +103,12 @@ const Newsletters: React.FC = () => {
                                         const h = size?.split('x')[1];
                                         return (
                                             <>
-                                                <div className="d-flex flex-column align-items-center">
-                                                    <video controls src={newSrc}
-                                                           style={{maxWidth: `${w}px`, maxHeight: `${h}px`}}/>
-                                                    <br/>
-                                                    <span className="m-0 fst-italic">{alt}</span>
-                                                </div>
+                        <span className="d-flex flex-column align-items-center m-0 p-0">
+                          <video controls src={newSrc}
+                                 style={{maxWidth: `${w}px`, maxHeight: `${h}px`}}/>
+                          <br/>
+                          <span className="m-0 fst-italic">{alt}</span>
+                        </span>
                                             </>
                                         );
                                     } else {
@@ -107,6 +116,13 @@ const Newsletters: React.FC = () => {
                                             <a href={href}>{children}</a>
                                         )
                                     }
+                                },
+                                table({children}) {
+                                    return (
+                                        <table className="table table-bordered table-striped">
+                                            {children}
+                                        </table>
+                                    );
                                 },
                             }}>
                             {md}
