@@ -10,9 +10,9 @@ const Participations: React.FC = () => {
                 principal et au PAMI principal. Les petits PAMIs prennent un grand coup de neuf avec une architecture
                 entièrement revue."
                 logo="/restricted-assets/cdfr/2026.png"
-                points={[undefined, undefined, undefined, undefined, undefined]}
-                result={0}
-                leaderboard={103}
+                points={[47, 57, 71, 70, 61]}
+                result={31}
+                leaderboard={108}
                 partners={[
                     {
                         logo: "/restricted-assets/partners/savants_fous.png",
