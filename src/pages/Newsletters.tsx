@@ -80,16 +80,15 @@ const Newsletters: React.FC = () => {
                                         </p>
                                     );
                                 },
-                                img({src, title, alt, ...props}) {
+                                img({src, title, alt}) {
                                     const newSrc = src?.startsWith('http') ? src : `/newsletters/${id}/${src}`;
                                     const w = title?.split('=')[1].split('x')[0];
-                                    // const h = title?.split('=')[1].split('x')[1];
                                     return (
                                         <>
-                                            <img src={newSrc} width={w} {...props}
+                                            <img src={newSrc} width={w}
                                                  style={{maxWidth: '100%'}}/>
                                             <br/>
-                                            <span className="m-0 fst-italic">{alt}</span>
+                                            <span className="m-0 fw-normal fst-italic">{alt}</span>
                                         </>
                                     );
                                 },
