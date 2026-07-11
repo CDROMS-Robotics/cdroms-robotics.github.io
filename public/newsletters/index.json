@@ -1,17 +1,42 @@
 {
-  "2702206": {
-    "date": "2026-02-27",
-    "title": "Février 2026",
-    "markdown": "draft-022026.md"
+  "2025": {
+    "2024-11-05": {
+      "title": "Novembre 2024",
+      "markdown": "newsletter-051124.md"
+    },
+    "2024-12-17": {
+      "title": "Décembre 2024",
+      "markdown": "newsletter-171224.md"
+    },
+    "2025-01-31": {
+      "title": "Janvier 2025",
+      "markdown": "newsletter-310125.md"
+    },
+    "2025-03-08": {
+      "title": "Mars 2025",
+      "markdown": "newsletter-080325.md"
+    },
+    "2025-05-18": {
+      "title": "Mai 2025",
+      "markdown": "newsletter-180525.md"
+    },
+    "2025-06-15": {
+      "title": "Juin 2025",
+      "markdown": "newsletter-150625.md"
+    }
   },
-  "052026": {
-    "date": "2026-05-13",
-    "title": "Mai 2026",
-    "markdown": "052026.md"
-  },
-  "062026": {
-    "date": "2026-06-08",
-    "title": "Juin 2026",
-    "markdown": "062026.md"
+  "2026": {
+    "2026-02-27": {
+      "title": "Février 2026",
+      "markdown": "draft-022026.md"
+    },
+    "2026-05-13": {
+      "title": "Mai 2026",
+      "markdown": "052026.md"
+    },
+    "2026-06-08": {
+      "title": "Juin 2026",
+      "markdown": "062026.md"
+    }
   }
 }
