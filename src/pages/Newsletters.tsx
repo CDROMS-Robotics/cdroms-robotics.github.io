@@ -69,6 +69,31 @@ const Newsletters: React.FC = () => {
         }
     }, [id, folder, data]);
 
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: "instant" as ScrollBehavior});
+    }, [id]);
+
+    const navigation = useMemo(() => {
+        if (!id) return undefined;
+        const year = parseInt(id.split("-")[0]);
+        const date = id.split("-").slice(1).join("-");
+        const yearData = data[year];
+        if (!yearData) return undefined;
+
+        const sorted = Object.entries(yearData)
+            .filter(([d]) => new Date(d) <= new Date())
+            .sort(([a], [b]) => new Date(a).getTime() - new Date(b).getTime());
+        const index = sorted.findIndex(([d]) => d === date);
+        if (index === -1) return undefined;
+
+        const prev = index > 0 ? sorted[index - 1] : undefined;
+        const next = index < sorted.length - 1 ? sorted[index + 1] : undefined;
+        return {
+            prev: prev ? {folder: `${year}-${prev[0]}`, title: prev[1].title} : undefined,
+            next: next ? {folder: `${year}-${next[0]}`, title: next[1].title} : undefined,
+        };
+    }, [id, data]);
+
     return useMemo(() => {
         if (loadError) {
             return (
@@ -213,10 +238,29 @@ const Newsletters: React.FC = () => {
                             {md}
                         </ReactMarkdown>
                     </div>
+                    <div className="d-flex justify-content-between align-items-center mt-4 mb-3 gap-2">
+                        <div className="text-start" style={{flex: 1}}>
+                            {navigation?.prev && (
+                                <a href={`/#/newsletters/${navigation.prev.folder}`}>
+                                    &laquo; {navigation.prev.title}
+                                </a>
+                            )}
+                        </div>
+                        <div className="text-center">
+                            <a href="/#/newsletters/" onClick={() => setMd('')}>Retour à la liste</a>
+                        </div>
+                        <div className="text-end" style={{flex: 1}}>
+                            {navigation?.next && (
+                                <a href={`/#/newsletters/${navigation.next.folder}`}>
+                                    {navigation.next.title} &raquo;
+                                </a>
+                            )}
+                        </div>
+                    </div>
                 </div>
             )
         }
-    }, [id, data, md, loadError, folder, currentCDFRYear])
+    }, [id, data, md, loadError, folder, currentCDFRYear, navigation])
 }
 
 export default Newsletters
