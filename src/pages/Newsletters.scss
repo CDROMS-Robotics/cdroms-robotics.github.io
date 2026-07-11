@@ -54,3 +54,38 @@
     --adm-bg: #ffebe9;
   }
 }
+
+// Renders "image-only" markdown tables
+.md-image-gallery-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead, tbody {
+    display: block;
+  }
+
+  tr {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1rem;
+    background: none !important; // kill the zebra striping
+    border: none;
+  }
+
+  th, td {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none !important;
+    padding: 0.5rem;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}

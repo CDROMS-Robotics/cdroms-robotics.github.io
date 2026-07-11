@@ -2,7 +2,7 @@ import * as React from "react";
 import {useEffect, useMemo, useState} from "react";
 import ReactMarkdown from 'react-markdown';
 import "./Newsletters.scss"
-import {remarkHighlight} from "../md-flavor.ts"
+import {isImageGalleryTable, remarkHighlight} from "../md-flavor.ts"
 import remarkDirective from "remark-directive";
 import {DEFAULT_ADMONITION_TYPES, remarkAdmonition} from "remark-admonition";
 import remarkEmoji from "remark-emoji";
@@ -155,9 +155,11 @@ const Newsletters: React.FC = () => {
                                         )
                                     }
                                 },
-                                table({children}) {
+                                table({node, children}) {
+                                    const gallery = node ? isImageGalleryTable(node) : false;
                                     return (
-                                        <table className="table table-bordered table-striped">
+                                        <table
+                                            className={gallery ? "md-image-gallery-table" : "table table-bordered table-striped"}>
                                             {children}
                                         </table>
                                     );
