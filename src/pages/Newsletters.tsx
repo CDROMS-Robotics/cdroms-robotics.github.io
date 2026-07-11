@@ -3,6 +3,9 @@ import {useEffect, useMemo, useState} from "react";
 import ReactMarkdown from 'react-markdown';
 import "./Newsletters.scss"
 import {remarkHighlight} from "../md-flavor.ts"
+import remarkDirective from "remark-directive";
+import {DEFAULT_ADMONITION_TYPES, remarkAdmonition} from "remark-admonition";
+import remarkEmoji from "remark-emoji";
 import {useParams} from "react-router-dom";
 import NewsletterLi from "../components/NewsletterLi.tsx";
 import remarkGfm from "remark-gfm";
@@ -90,7 +93,13 @@ const Newsletters: React.FC = () => {
                     </div>
                     <div style={{textAlign: "justify"}}>
                         <ReactMarkdown
-                            remarkPlugins={[remarkHighlight, remarkGfm]}
+                            remarkPlugins={[remarkDirective, [remarkAdmonition, {
+                                defaultElement: 'div',
+                                types: new Map([
+                                    ...DEFAULT_ADMONITION_TYPES,
+                                    ['info', {defaultLabel: 'Info'}],
+                                ]),
+                            }], remarkHighlight, remarkEmoji, remarkGfm]}
                             components={{
                                 p({node, children, ...props}) {
                                     const hasImg = node?.children?.some(

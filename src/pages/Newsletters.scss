@@ -5,3 +5,52 @@
 .md-highlight {
   background-color: rgba(217, 219, 150, 0.29);
 }
+
+// info, note, tip, warning bubble
+[data-admonition-name] {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--adm-color, #888);
+  background: var(--adm-bg, #f5f5f5);
+  border-radius: 0 4px 4px 0;
+
+  > p:first-child { margin-top: 0; }
+  > p:last-child  { margin-bottom: 0; }
+
+  &::before {
+    content: attr(data-admonition-label);
+    display: block;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--adm-color, #888);
+    margin-bottom: 0.35rem;
+  }
+
+  &[data-admonition-name="tip"] {
+    --adm-color: #1a7f37;
+    --adm-bg: #e6f7ec;
+  }
+
+  &[data-admonition-name="note"] {
+    --adm-color: #0969da;
+    --adm-bg: #e8f1fd;
+  }
+
+  &[data-admonition-name="info"] {
+    --adm-color: #0969da;
+    --adm-bg: #e8f1fd;
+  }
+
+  &[data-admonition-name="warning"] {
+    --adm-color: #9a6700;
+    --adm-bg: #fff8e5;
+  }
+
+  &[data-admonition-name="danger"],
+  &[data-admonition-name="caution"] {
+    --adm-color: #cf222e;
+    --adm-bg: #ffebe9;
+  }
+}
