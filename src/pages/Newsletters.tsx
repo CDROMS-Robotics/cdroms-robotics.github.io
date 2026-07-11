@@ -17,23 +17,45 @@ const Newsletters: React.FC = () => {
     const {id} = useParams();
     const [data, setData] = useState<Record<string, NewsletterData>>({});
     const [md, setMd] = useState('');
+    const [loadError, setLoadError] = useState<string | null>(null);
 
     useEffect(() => {
         fetch('/newsletters/index.json')
-            .then(res => res.json())
-            .then(setData);
+            .then(res => {
+                if (!res.ok) throw new Error(`Failed to load newsletter index (${res.status})`);
+                return res.json()
+            })
+            .then(setData)
+            .catch(err => {
+                console.error(err);
+                setLoadError("Impossible de charger la liste des newsletters.");
+            });
     }, []);
 
     useEffect(() => {
         if (id && data[id]) {
             fetch(`/newsletters/${id}/${data[id].markdown}`)
-                .then(res => res.text())
+                .then(res => {
+                    if (!res.ok) throw new Error(`Failed to load newsletter (${res.status})`);
+                    return res.text()
+                })
                 .then(text => text.replace(/\\n/g, "\n"))
-                .then(setMd);
+                .then(setMd)
+                .catch(err => {
+                    console.error(err);
+                    setLoadError("Impossible de charger cette newsletter.");
+                });
         }
     }, [id, data]);
 
     return useMemo(() => {
+        if (loadError) {
+            return (
+                <div className="container col-12 col-md-6 mt-5">
+                    <p className="text-danger">{loadError}</p>
+                </div>
+            );
+        }
         if (!id) {
             return <>
                 <div className="container col-12 col-md-6 mt-5" style={{textAlign: "justify"}}>
@@ -82,10 +104,10 @@ const Newsletters: React.FC = () => {
                                 },
                                 img({src, title, alt}) {
                                     const newSrc = src?.startsWith('http') ? src : `/newsletters/${id}/${src}`;
-                                    const w = title?.split('=')[1].split('x')[0];
+                                    const w = title?.split('=')[1]?.split('x')[0];
                                     return (
                                         <>
-                                            <img src={newSrc} width={w}
+                                            <img src={newSrc} width={w} alt={alt ?? ''}
                                                  style={{maxWidth: '100%'}}/>
                                             <br/>
                                             <span className="m-0 fw-normal fst-italic">{alt}</span>
@@ -94,17 +116,25 @@ const Newsletters: React.FC = () => {
                                 },
                                 a({href, children}) {
                                     const newSrc = href?.startsWith('http') || href?.startsWith('/newsletters') ? href : `/newsletters/${id}/${href}`;
+                                    const SIZE_TOKEN = /^\d+x\d+$/;
                                     if (newSrc.endsWith('mp4') && !href?.startsWith("/newsletters") && children) {
                                         const words = children.toString().split(" ");
-                                        const size = words[words.length - 1];
-                                        const alt = children.toString().replace(` ${size}`, '');
+                                        const lastWord = words[words.length - 1];
+                                        const hasSize = SIZE_TOKEN.test(lastWord);
+                                        const size = hasSize ? lastWord : undefined;
+                                        const alt = hasSize
+                                            ? children.toString().replace(` ${size}`, '')
+                                            : children.toString();
                                         const w = size?.split('x')[0];
                                         const h = size?.split('x')[1];
                                         return (
                                             <>
                         <span className="d-flex flex-column align-items-center m-0 p-0">
                           <video controls src={newSrc}
-                                 style={{maxWidth: `${w}px`, maxHeight: `${h}px`}}/>
+                                 style={{
+                                     maxWidth: w ? `${w}px` : '100%',
+                                     ...(h ? {maxHeight: `${h}px`} : {}),
+                                 }}/>
                           <br/>
                           <span className="m-0 fst-italic">{alt}</span>
                         </span>
@@ -130,7 +160,7 @@ const Newsletters: React.FC = () => {
                 </div>
             )
         }
-    }, [id, data, md])
+    }, [id, data, md, loadError])
 }
 
 export default Newsletters
