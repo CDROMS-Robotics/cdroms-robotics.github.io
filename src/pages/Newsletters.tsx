@@ -116,8 +116,24 @@ const Newsletters: React.FC = () => {
                                     const w = title?.split('=')[1]?.split('x')[0];
                                     return (
                                         <>
-                                            <img src={newSrc} width={w} alt={alt ?? ''}
-                                                 style={{maxWidth: '100%'}}/>
+                                            <img src={newSrc}
+                                                 width={w}
+                                                 alt={alt ?? ''}
+                                                 style={{
+                                                     maxWidth: '100%',
+                                                     cursor: "pointer",
+                                                     transition: "transform 0.2s ease",
+                                                     borderRadius: "4px",
+                                                     position: "relative",
+                                                 }}
+                                                 onMouseEnter={e => {
+                                                     e.currentTarget.style.transform = "scale(1.5)";
+                                                     e.currentTarget.style.zIndex = "1000";
+                                                 }}
+                                                 onMouseLeave={e => {
+                                                     e.currentTarget.style.transform = "scale(1)";
+                                                     e.currentTarget.style.zIndex = "1";
+                                                 }}/>
                                             <br/>
                                             <span className="m-0 fw-normal fst-italic">{alt}</span>
                                         </>
