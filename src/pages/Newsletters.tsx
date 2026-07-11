@@ -11,16 +11,29 @@ import NewsletterLi from "../components/NewsletterLi.tsx";
 import remarkGfm from "remark-gfm";
 
 interface NewsletterData {
-    date: string;
     title: string;
     markdown: string;
 }
 
 const Newsletters: React.FC = () => {
+    const currentCDFRYear = useMemo(() => {
+        const y = new Date().getFullYear();
+        return new Date().getMonth() > 7 ? y + 1 : y;
+    }, [])
     const {id} = useParams();
-    const [data, setData] = useState<Record<string, NewsletterData>>({});
+    const folder = useMemo(() => {
+        if (id) {
+            const year = parseInt(id.split("-")[0])
+            const date = id.split("-").slice(1).join("-");
+            return `${year - 2000}-${date.replaceAll("-", "")}`
+        } else {
+            return undefined
+        }
+    }, [id])
+    const [data, setData] = useState<Record<string, Record<string, NewsletterData>>>({});
     const [md, setMd] = useState('');
     const [loadError, setLoadError] = useState<string | null>(null);
+
 
     useEffect(() => {
         fetch('/newsletters/index.json')
@@ -36,20 +49,25 @@ const Newsletters: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if (id && data[id]) {
-            fetch(`/newsletters/${id}/${data[id].markdown}`)
-                .then(res => {
-                    if (!res.ok) throw new Error(`Failed to load newsletter (${res.status})`);
-                    return res.text()
-                })
-                .then(text => text.replace(/\\n/g, "\n"))
-                .then(setMd)
-                .catch(err => {
-                    console.error(err);
-                    setLoadError("Impossible de charger cette newsletter.");
-                });
+        if (id && folder) {
+            const year = parseInt(id.split("-")[0])
+            const date = id.split("-").slice(1).join("-");
+            const folder = `${year - 2000}-${date.replaceAll("-", "")}`
+            if (data[year] && data[year][date]) {
+                fetch(`/newsletters/${folder}/${data[year][date].markdown}`)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Failed to load newsletter (${res.status})`);
+                        return res.text()
+                    })
+                    .then(text => text.replace(/\\n/g, "\n"))
+                    .then(setMd)
+                    .catch(err => {
+                        console.error(err);
+                        setLoadError("Impossible de charger cette newsletter.");
+                    });
+            }
         }
-    }, [id, data]);
+    }, [id, folder, data]);
 
     return useMemo(() => {
         if (loadError) {
@@ -68,28 +86,39 @@ const Newsletters: React.FC = () => {
                     à réaliser durant la Coupe, la conception de pièces mécaniques ou encore les tests de code des
                     robots, une de nos newsletters abordera (probablement) le sujet !
                 </div>
-                <div className="container col-12 col-md-3 mt-3 mb-5" style={{width: "30%"}}>
-                    <h3 className="m-0 mb-3">
-                        Les newsletters de cette année :
-                    </h3>
-                    <ul className="m-0 d-flex flex-column gap-1">
-                        {Object.entries(data)
-                            .filter(([_, d]) => new Date(d.date) <= new Date())
-                            .map(([folder, data]) => (
-                                <NewsletterLi
-                                    key={folder}
-                                    folder={folder}
-                                    title={data.title}
-                                    date={data.date}
-                                />
-                            ))}
-                    </ul>
+                <div className="container col-12 col-md-3 mt-3 mb-5" style={{width: "33%"}}>
+                    {
+                        Object.entries(data)
+                            .sort(([a,], [b,]) => parseInt(b) - parseInt(a))
+                            .map(([cdfrYear, data]) => (
+                                <>
+                                    <h3 className={`m-0 mb-3 ${cdfrYear == `${currentCDFRYear}` ? '' : 'mt-4'}`}>
+                                        {cdfrYear == `${currentCDFRYear}` ?
+                                            "Les newsletters de cette année :" :
+                                            `Coupe de France de Robotique ${cdfrYear}`}
+                                    </h3>
+                                    <ul className="m-0 d-flex flex-column gap-1">
+                                        {Object.entries(data)
+                                            .filter(([date, _]) => new Date(date) <= new Date())
+                                            .sort(([a,], [b,]) => new Date(b).getTime() - new Date(a).getTime())
+                                            .map(([date, data]) => (
+                                                <NewsletterLi
+                                                    key={`${cdfrYear}-${date}`}
+                                                    folder={`${cdfrYear}-${date}`}
+                                                    title={data.title}
+                                                    date={date}
+                                                />
+                                            ))}
+                                    </ul>
+                                </>
+                            ))
+                    }
                 </div>
             </>;
         } else {
             return (<div className="container col-12 col-md-6">
                     <div className="d-flex justify-content-end">
-                        <a href="/#/newsletters/">Retour à la liste</a>
+                        <a href="/#/newsletters/" onClick={() => setMd('')}>Retour à la liste</a>
                     </div>
                     <div style={{textAlign: "justify"}}>
                         <ReactMarkdown
@@ -112,7 +141,7 @@ const Newsletters: React.FC = () => {
                                     );
                                 },
                                 img({src, title, alt}) {
-                                    const newSrc = src?.startsWith('http') ? src : `/newsletters/${id}/${src}`;
+                                    const newSrc = src?.startsWith('http') ? src : `/newsletters/${folder}/${src}`;
                                     const w = title?.split('=')[1]?.split('x')[0];
                                     return (
                                         <>
@@ -140,7 +169,7 @@ const Newsletters: React.FC = () => {
                                     );
                                 },
                                 a({href, children}) {
-                                    const newSrc = href?.startsWith('http') || href?.startsWith('/newsletters') ? href : `/newsletters/${id}/${href}`;
+                                    const newSrc = href?.startsWith('http') || href?.startsWith('/newsletters') ? href : `/newsletters/${folder}/${href}`;
                                     const SIZE_TOKEN = /^\d+x\d+$/;
                                     if (newSrc.endsWith('mp4') && !href?.startsWith("/newsletters") && children) {
                                         const words = children.toString().split(" ");
@@ -187,7 +216,7 @@ const Newsletters: React.FC = () => {
                 </div>
             )
         }
-    }, [id, data, md, loadError])
+    }, [id, data, md, loadError, folder, currentCDFRYear])
 }
 
 export default Newsletters
